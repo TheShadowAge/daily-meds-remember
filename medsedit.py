@@ -37,6 +37,15 @@ def load_medications(filename="medications.pkl"):
     except FileNotFoundError:
         return []
 
+# Display Existing Medications
+def display_medications(medications):
+    if not medications:
+        print("Nenhum medicamento cadastrado.")
+        return
+    for index, med in enumerate(medications, start=1):
+        med_type = " (Medicamento para dormir)" if med.is_sleeping_med else ""
+        print(f"{index} - {med.name}{med_type}, Estoque: {med.stock}, Consumo Diário: {med.daily_intake}")
+
 # List Medications
 def list_medications(medications):
     if not medications:
@@ -105,6 +114,8 @@ def view_predictions(medications):
             print(f"{med.name}:")
             print(f"  {end_date}")  # This will print the string like "Uso SOS, sem previsão de término."
 
+
+
 # Remove Medication
 def remove_medication(medications):
     display_medications(medications)
@@ -135,9 +146,10 @@ def main():
         print("1 - Listar medicamentos")
         print("2 - Adicionar medicamento")
         print("3 - Editar medicamento")
-        print("4 - Ver previsões de término")
-        print("5 - Pular dia de medicamento para dormir")
-        print("6 - Sair")
+        print("4 - Remover medicamento")
+        print("5 - Ver previsões de término")
+        print("6 - Pular dia de medicamento para dormir")
+        print("7 - Sair")
         choice = input("Escolha uma opção: ").strip()
         if choice == '1':
             list_medications(medications)
